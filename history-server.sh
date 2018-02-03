@@ -17,19 +17,21 @@ then
 fi
 
 LISTEN_PORT=${1:-8456}
-SECRET="$(cat secret)"
 
 # Check socat is there
 which socat > /dev/null 2>&1 || (echo socat should be installed && exit 1)
 
 cat > writer.sh <<- 'END'
+	#!/bin/bash
 	read password
 	# Remove whitespace from end of password (eg when using telnet)
 	password="${password%"${password##*[![:space:]]}"}" 
 	# Password failure
+	SECRET="$(cat secret)"
 	if [[ ${password} != ${SECRET} ]]
 	then
 		echo 'Password failure'
+		echo "Password failure: ${password} ${SECRET}" >> history-server.log
 		exit 1
 	fi
 	touch history.dat
@@ -44,4 +46,19 @@ cat > writer.sh <<- 'END'
 END
 chmod +x writer.sh
 
-socat -vvv TCP-LISTEN:${LISTEN_PORT},reuseaddr,fork SYSTEM:$(pwd)/writer.sh
+socat -vvv TCP-LISTEN:${LISTEN_PORT},reuseaddr,fork SYSTEM:$(pwd)/writer.sh &
+SOCATPID="$!"
+
+
+function killsocat() {
+	kill ${SOCATPID} >/dev/null 2>&1 || return > /dev/null 2>&1
+	sleep 10
+	if ps -p ${SOCATPID} > /dev/null 2>&1
+	then
+		kill -9 ${SOCATPID}
+	fi
+}
+
+trap killsocat EXIT INT TERM
+
+wait
