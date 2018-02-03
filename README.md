@@ -13,7 +13,7 @@ exit telnet.
 - Add `/path/to/history-service/server.sh` to cronjob to run as a service - run-one takes care of duplicates
 
 ```
-* * * * * /path/to/history-service/server.sh || true
+* * * * * /path/to/history-service/server.sh
 ```
 
 - Add this to your ~/.bashrc file, replacing YOURSECRET with the secret in the `secret` file and HOSTNAME with the host the service is running on.
