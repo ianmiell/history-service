@@ -1,8 +1,10 @@
 # history-service
 
-## Overview
+## Overview
 
-Stores your 
+Stores your history on a central server. 
+
+All you need is a port and a host to serve from, and your bash commands will be sent to and retrieved from there.
 
 ## Setup
 
