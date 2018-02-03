@@ -19,7 +19,7 @@ read password
 # Remove whitespace from end of password (eg when using telnet)
 password="${password%"${password##*[![:space:]]}"}" 
 # Password failure
-if [[ $password != $SECRET ]]
+if [[ ${password} != ${SECRET} ]]
 then
 	echo 'Password failure'
 	exit 1
