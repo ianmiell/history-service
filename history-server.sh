@@ -50,7 +50,8 @@ socat -vvv TCP-LISTEN:${LISTEN_PORT},reuseaddr,fork SYSTEM:$(pwd)/writer.sh &
 SOCATPID="$!"
 
 
-function killsocat() {
+function cleanup() {
+	rm -f writer.sh
 	kill ${SOCATPID} >/dev/null 2>&1 || return > /dev/null 2>&1
 	sleep 10
 	if ps -p ${SOCATPID} > /dev/null 2>&1
@@ -59,6 +60,6 @@ function killsocat() {
 	fi
 }
 
-trap killsocat EXIT INT TERM
+trap cleanup EXIT INT TERM
 
 wait
