@@ -44,15 +44,15 @@ Change port in `listener.sh` if you want, but remember to change below too.
 `secret` file and HOSTNAME with the host the service is running on.
 
 ```
-	# history service
-	function history_service_send_last_command() { LAST=$(HISTTIMEFORMAT='' builtin history 1 | cut -c 8-); printf 'YOURSECRET\n'${LAST}'\n' | nc HOSTNAME PORTNUMBER; }
-	if [[ ${PROMPT_COMMAND} = '' ]]
-	then
-		PROMPT_COMMAND="history_service_send_last_command"
-	else
-		PROMPT_COMMAND="${PROMPT_COMMAND};history_service_send_last_command"
-	fi
-	alias history="printf 'YOURSECRET\n\n' | nc HOSTNAME PORTNUMBER'
+# history service
+function history_service_send_last_command() { LAST=$(HISTTIMEFORMAT='' builtin history 1 | cut -c 8-); printf 'YOURSECRET\n'${LAST}'\n' | nc HOSTNAME PORTNUMBER; }
+if [[ ${PROMPT_COMMAND} = '' ]]
+then
+	PROMPT_COMMAND="history_service_send_last_command"
+else
+	PROMPT_COMMAND="${PROMPT_COMMAND};history_service_send_last_command"
+fi
+alias history="printf 'YOURSECRET\n\n' | nc HOSTNAME PORTNUMBER'
 ```
 
 The security level of this is sufficent to stop casual users from abusing your
