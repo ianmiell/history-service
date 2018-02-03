@@ -19,13 +19,13 @@ exit telnet.
 - Add this to your ~/.bashrc file, replacing YOURSECRET with the secret in the `secret` file and HOSTNAME with the host the service is running on.
 
 ```
-        # history service                                                                                                              
-        if [[ ${PROMPT_COMMAND} = '' ]]                                                                                                
-        then                                                                                                                           
-            PROMPT_COMMAND="printf 'YOURSECRET\n'"!!"'\n' | /dev/tcp/HOSTNAME/8456"
-		else
-			PROMPT_COMMAND="${PROMPT_COMMAND} && printf 'YOURSECRET\n'"!!"'\n' | /dev/tcp/HOSTNAME/8456"
-		fi
+        # history service
+        if [[ ${PROMPT_COMMAND} = '' ]]
+        then
+        	PROMPT_COMMAND="printf 'YOURSECRET\n'"!!"'\n' | /dev/tcp/HOSTNAME/8456"
+	else
+		PROMPT_COMMAND="${PROMPT_COMMAND} && printf 'YOURSECRET\n'"!!"'\n' | /dev/tcp/HOSTNAME/8456"
+	fi
 ```
 
 The security level of this is sufficent to stop casual users from abusing your
