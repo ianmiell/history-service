@@ -7,7 +7,7 @@
 - Run: 'chmod 400 secret' to make file relatively secure
 
 - Test it: run `./server.sh` and `telnet` to host on port 8456 (change port in
-listener.sh if you want). Input password, then some text, then `CTRL-]` and `q` to
+`listener.sh` if you want). Input password, then some text, then `CTRL-]` and `q` to
 exit telnet.
 
 - Add `/path/to/server.sh` to cronjob to run as a service - run-one takes care of duplicates
