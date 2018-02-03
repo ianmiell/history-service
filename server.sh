@@ -2,10 +2,10 @@
 
 set -ue
 
-LISTEN_PORT=${1:-8456}
+# make sure we are in the right folder
+cd "$(dirname ${BASH_SOURCE[0]})"
 
-# Check socat is there
-which socat > /dev/null 2>&1 || (echo socat should be installed && exit 1)
+# Check we have run-one-constantly available
+which run-one-constantly > /dev/null 2>&1 || (echo 'Install run-one to get the run-one-constantly command && exit 1')
 
-#socat -vvv TCP-LISTEN:${LISTEN_PORT},reuseaddr,fork OPEN:$(pwd)/history.dat,create,ignoreeof!!$(pwd)/history.dat
-socat -vvv TCP-LISTEN:${LISTEN_PORT},reuseaddr,fork SYSTEM:$(pwd)/listener.sh
+run-one-constantly ./listener.sh

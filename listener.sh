@@ -1,18 +1,10 @@
 #!/bin/bash
 
-set -uex
+set -ue
 
-SECRET="somesecret"
+LISTEN_PORT=${1:-8456}
 
-read password
-# Remove whitespace from end of password (eg when using telnet)
-password="${password%"${password##*[![:space:]]}"}" 
-# Password failure
-if [[ $password != $SECRET ]]
-then
-	exit 1
-fi
-while read input
-do
-	echo $input >> history.dat
-done
+# Check socat is there
+which socat > /dev/null 2>&1 || (echo socat should be installed && exit 1)
+
+socat -vvv TCP-LISTEN:${LISTEN_PORT},reuseaddr,fork SYSTEM:$(pwd)/writer.sh
