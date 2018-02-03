@@ -1,14 +1,13 @@
 #!/bin/bash
 
-set -uex
-
+set -ue
 
 if ! [ -a secret ]
 then
 	echo 'Create secret file with your password, and run "chmod 400 secret"'
 	exit 1
 fi
-if [[ $(expr $(stat -f%A secret) % 100) != '0' ]]
+if [[ $(expr $(stat -c %a secret 2> /dev/null || stat -f%A secret 2> /dev/null || echo stat failed) % 100) != '0' ]]
 then
 	echo 'Run "chmod 400 secret" - file should only be readable by you'
 	exit 1

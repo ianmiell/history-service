@@ -10,10 +10,10 @@
 `listener.sh` if you want). Input password, then some text, then `CTRL-]` and `q` to
 exit telnet.
 
-- Add `/path/to/history-server/server.sh` to cronjob to run as a service - run-one takes care of duplicates
+- Add `/path/to/history-service/server.sh` to cronjob to run as a service - run-one takes care of duplicates
 
 ```
-* * * * * /path/to/history-server/server.sh || true
+* * * * * /path/to/history-service/server.sh || true
 ```
 
 - Add this to your ~/.bashrc file, replacing YOURSECRET with the secret in the `secret` file and HOSTNAME with the host the service is running on.
