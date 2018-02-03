@@ -191,7 +191,7 @@ ${RUN_ONE} socat -vvv TCP-LISTEN:${LISTEN_PORT},reuseaddr,fork SYSTEM:"$(pwd)/wr
 SOCATPID="$!"
 
 function cleanup() {
-	#rm -f writer.sh run-one.sh
+	rm -f writer.sh run-one.sh
 	kill ${SOCATPID} >/dev/null 2>&1 || return > /dev/null 2>&1
 	echo Pausing before final kill >> ${LOGFILE}
 	sleep 10
