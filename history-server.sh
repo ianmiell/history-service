@@ -1,6 +1,6 @@
 #!/bin/bash
 
-set -ue
+set -uex
 
 # make sure we are in the right folder
 cd "$(dirname ${BASH_SOURCE[0]})"
@@ -39,6 +39,7 @@ cat > writer.sh <<- 'END'
 	touch history.dat
 	while read input
 	do
+		echo $input >> history-server.log
 		if [[ $input = '' ]]
 		then
 			cat history.dat
@@ -186,12 +187,11 @@ then
 	chmod +x run-one
 fi
 
-${RUN_ONE} socat -vvv TCP-LISTEN:${LISTEN_PORT},reuseaddr,fork SYSTEM:"$(pwd)/writer.sh" &
+${RUN_ONE} socat -vvv TCP-LISTEN:${LISTEN_PORT},reuseaddr,fork SYSTEM:"$(pwd)/writer.sh"
 
 SOCATPID="$!"
 
 function cleanup() {
-	rm -f writer.sh run-one.sh
 	kill ${SOCATPID} >/dev/null 2>&1 || return > /dev/null 2>&1
 	echo Pausing before final kill >> ${LOGFILE}
 	sleep 10

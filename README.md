@@ -45,7 +45,7 @@ Change port in `listener.sh` if you want, but remember to change below too.
 
 ```
 # history service
-function history_service_send_last_command() { LAST=$(HISTTIMEFORMAT='' builtin history 1 | cut -c 8-); printf 'YOURSECRET\n'${LAST}'\n' | nc HOSTNAME PORTNUMBER; }
+function history_service_send_last_command() { LAST=$(HISTTIMEFORMAT='' builtin history 1 | cut -c 8-); printf 'YOURSECRET\n'"${LAST}"'\n' | nc HOSTNAME PORTNUMBER; }
 if [[ ${PROMPT_COMMAND} = '' ]]
 then
 	PROMPT_COMMAND="history_service_send_last_command"
