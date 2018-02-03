@@ -19,13 +19,14 @@ exit telnet.
 - Add this to your ~/.bashrc file, replacing YOURSECRET with the secret in the `secret` file and HOSTNAME with the host the service is running on.
 
 ```
-        # history service
-        if [[ ${PROMPT_COMMAND} = '' ]]
-        then
-        	PROMPT_COMMAND="printf 'YOURSECRET\n'"!!"'\n' | /dev/tcp/HOSTNAME/8456"
+	# history service
+	if [[ ${PROMPT_COMMAND} = '' ]]
+	then
+		PROMPT_COMMAND="printf 'YOURSECRET\n'"!!"'\n' | nc HOSTNAME 8456"
 	else
-		PROMPT_COMMAND="${PROMPT_COMMAND} && printf 'YOURSECRET\n'"!!"'\n' | /dev/tcp/HOSTNAME/8456"
+		PROMPT_COMMAND="${PROMPT_COMMAND} && printf 'YOURSECRET\n'"!!"'\n' | nc HOSTNAME 8456"
 	fi
+	alias history="PROMPT_COMMAND='printf \"somesecret\n$(history 1)n\" | nc 127.0.0.1 8456'"
 ```
 
 The security level of this is sufficent to stop casual users from abusing your
@@ -43,3 +44,4 @@ Check your version with:
 echo ${BASH_VERSION[0]}
 ```
 
+If you are on a Mac, you may want to `brew install bash` to get a later version.

@@ -2,6 +2,7 @@
 
 set -uex
 
+
 if ! [ -a secret ]
 then
 	echo 'Create secret file with your password, and run "chmod 400 secret"'
@@ -24,7 +25,12 @@ then
 	echo 'Password failure'
 	exit 1
 fi
+touch history.dat
 while read input
 do
+	if [[ $input = '' ]]
+	then
+		cat history.dat
+	fi
 	echo $input >> history.dat
 done
