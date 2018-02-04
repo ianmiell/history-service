@@ -4,7 +4,8 @@
 
 Stores your history on a central server. 
 
-All you need is a port and a host to serve from, and your bash commands will be sent to and retrieved from there.
+All you need is a port and a host to serve from, and your bash commands will be
+sent to and retrieved from there.
 
 ## Setup
 
@@ -34,14 +35,15 @@ kill %1
 
 Change port in `listener.sh` if you want, but remember to change below too.
 
-- Add `/path/to/history-service/server.sh` to cronjob to run as a service - run-one takes care of duplicates
+- Add `/path/to/history-service/server.sh` to cronjob to run as a service -
+`run-one` takes care of duplicates
 
 ```
 * * * * * /path/to/history-service/server.sh
 ```
 
 - Add this to your ~/.bashrc file, replacing `YOURSECRET` with the secret in the
-`secret` file and HOSTNAME with the host the service is running on.
+`secret` file and `HOSTNAME` with the host the service is running on.
 
 ```
 # history service
@@ -74,8 +76,8 @@ echo ${BASH_VERSION[0]}
 
 If you are on a Mac, you may want to `brew install bash` to get a later version.
 
-- socat
+- `socat`
 
 http://www.dest-unreach.org/socat/
 
-Available on most package managers
+Available on most package managers.
