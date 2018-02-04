@@ -7,6 +7,8 @@ Stores your history on a central server.
 All you need is a port and a host to serve from, and your bash commands will be
 sent to and retrieved from there.
 
+![overviewimage](https://raw.githubusercontent.com/ianmiell/history-service/master/history-server.png)
+
 ## Setup
 
 
@@ -54,7 +56,7 @@ then
 else
 	PROMPT_COMMAND="${PROMPT_COMMAND};history_service_send_last_command"
 fi
-alias history="printf 'YOURSECRET\n\n' | nc HOSTNAME PORTNUMBER'
+alias historyservice="printf 'YOURSECRET\n\n' | nc HOSTNAME PORTNUMBER'
 ```
 
 The security level of this is sufficent to stop casual users from abusing your
