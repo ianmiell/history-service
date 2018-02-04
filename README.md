@@ -23,7 +23,7 @@ HOSTNAME   - hostname you run the service on
 
 - Test it:
 
-Run, replacing YOURSECRET with your secret above.
+Run, replacing `YOURSECRET` with your secret above.
 
 ```
 ./history-server.sh PORTNUMBER &
@@ -40,7 +40,7 @@ Change port in `listener.sh` if you want, but remember to change below too.
 * * * * * /path/to/history-service/server.sh
 ```
 
-- Add this to your ~/.bashrc file, replacing YOURSECRET with the secret in the
+- Add this to your ~/.bashrc file, replacing `YOURSECRET` with the secret in the
 `secret` file and HOSTNAME with the host the service is running on.
 
 ```
