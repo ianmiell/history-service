@@ -9,6 +9,8 @@ sent to and retrieved from there.
 
 ![overviewimage](https://raw.githubusercontent.com/ianmiell/history-service/master/history-server.png)
 
+Basic security is provided by a simple shared secret.
+
 ## Setup
 
 
@@ -20,18 +22,18 @@ YOURSECRET - your secret word for entry to service
 HOSTNAME   - hostname you run the service on
 ```
 
-- Put password for the service in 'secret' file (on one line)
+- Put password for the service in `secret` file (on one line)
 
 - Run: `chmod 400 secret` to make the file (relatively) secure
 
-- Test it:
+- Test it on the `localhost`:
 
 Run, replacing `YOURSECRET` with your secret above.
 
 ```
 ./history-server.sh PORTNUMBER &
-printf 'YOURSECRET\ntest\n' | nc localhost 8546
-printf 'YOURSECRET\n\n' | nc localhost 8546
+printf 'YOURSECRET\ntest\n' | nc localhost PORTNUMBER
+printf 'YOURSECRET\n\n' | nc localhost PORTNUMBER
 kill %1
 ```
 
