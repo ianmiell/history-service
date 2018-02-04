@@ -19,7 +19,7 @@ HOSTNAME   - hostname you run the service on
 
 - Put password for the service in 'secret' file (on one line)
 
-- Run: 'chmod 400 secret' to make file (relatively) secure
+- Run: `chmod 400 secret` to make the file (relatively) secure
 
 - Test it:
 
