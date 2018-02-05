@@ -18,8 +18,8 @@ Key for below:
 
 ```
 PORTNUMBER - port you want to run on
-YOURSECRET - your secret word for entry to service
 HOSTNAME   - hostname you run the service on
+YOURSECRET - your secret word for entry to service
 ```
 
 - Put password for the service in `secret` file (on one line)
@@ -31,23 +31,28 @@ HOSTNAME   - hostname you run the service on
 Run, replacing `YOURSECRET` with your secret above.
 
 ```
-./history-server.sh PORTNUMBER &
+$ ./history-server.sh PORTNUMBER &
 printf 'YOURSECRET\ntest\n' | nc localhost PORTNUMBER
 printf 'YOURSECRET\n\n' | nc localhost PORTNUMBER
 kill %1
 ```
 
-Change port in `listener.sh` if you want, but remember to change below too.
-
 - Add `/path/to/history-service/server.sh` to cronjob to run as a service -
 `run-one` takes care of duplicates
+
+```
+$ crontab -e
+```
+
+Then input the line (replacing the path):
 
 ```
 * * * * * /path/to/history-service/server.sh
 ```
 
-- Add this to your ~/.bashrc file, replacing `YOURSECRET` with the secret in the
-`secret` file and `HOSTNAME` with the host the service is running on.
+- Append the following to your ~/.bashrc file, replacing `YOURSECRET` with the
+secret in the `secret` file and `HOSTNAME` with the host the service is running
+on.
 
 ```
 # history service
@@ -70,7 +75,7 @@ Use at your own risk.
 
 Requires:
 
-- bash v4+
+- `bash` v4+
 
 Check your version with:
 
@@ -79,9 +84,17 @@ echo ${BASH_VERSION[0]}
 ```
 
 If you are on a Mac, you may want to `brew install bash` to get a later version.
+The default one that ships is a 3.x version (!?).
 
 - `socat`
 
 http://www.dest-unreach.org/socat/
 
 Available on most package managers.
+
+## Bugs / TODOs
+
+- Multi-line commands not well-handled
+- Unique the commands?
+- Record the date and source of the command?
+- Create a history db?
