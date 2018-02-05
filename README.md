@@ -47,7 +47,7 @@ $ crontab -e
 Then input the line (replacing the path):
 
 ```
-* * * * * /path/to/history-service/server.sh
+* * * * * /path/to/history-service/history-server.sh
 ```
 
 - Append the following to your ~/.bashrc file, replacing `YOURSECRET` with the
