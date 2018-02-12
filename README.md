@@ -56,14 +56,14 @@ on.
 
 ```
 # history service
-function history_service_send_last_command() { LAST=$(HISTTIMEFORMAT='' builtin history 1 | cut -c 8-); printf 'YOURSECRET\n'"${LAST}"'\n' | nc HOSTNAME PORTNUMBER; }
+function history_service_send_last_command() { LAST=$(HISTTIMEFORMAT='' builtin history 1 | cut -c 8-); printf '%q' 'YOURSECRET\n'"${LAST}"'\n' | nc HOSTNAME PORTNUMBER; }
 if [[ ${PROMPT_COMMAND} = '' ]]
 then
 	PROMPT_COMMAND="history_service_send_last_command"
 else
 	PROMPT_COMMAND="${PROMPT_COMMAND};history_service_send_last_command"
 fi
-alias historyservice="printf 'YOURSECRET\n\n' | nc HOSTNAME PORTNUMBER'
+alias historyservice="printf '%q' 'YOURSECRET\n\n' | nc HOSTNAME PORTNUMBER'
 ```
 
 The security level of this is sufficent to stop casual users from abusing your
