@@ -95,6 +95,7 @@ Available on most package managers.
 ## Bugs / TODOs
 
 - Multi-line commands not well-handled
+- No 'offline' store and forward
 - Unique the commands?
 - Record the date and source of the command?
 - Create a history db?
